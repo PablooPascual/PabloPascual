@@ -378,6 +378,120 @@
             margin-top: 6px;
             outline: none;
         }
+
+        .contact-modal-header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+            color: white;
+            border-radius: 24px 24px 0 0;
+            padding: 40px 24px 32px;
+            margin: -40px -40px 32px -40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-modal-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+            font-size: 24px;
+            color: #60a5fa;
+            backdrop-filter: blur(4px);
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-modal-header h2 {
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin: 0 0 8px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-modal-header p {
+            font-size: 13px;
+            color: #cffafe;
+            position: relative;
+            z-index: 1;
+            margin: 0;
+        }
+
+        .contact-form-group {
+            margin-bottom: 16px;
+        }
+
+        .contact-form-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #334155;
+            letter-spacing: 0.05em;
+            margin-bottom: 6px;
+        }
+
+        .contact-form-group input,
+        .contact-form-group textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 14px;
+            font-family: 'Sora', sans-serif;
+            transition: all 0.25s ease;
+            background: #fafbfc;
+        }
+
+        .contact-form-group input:focus,
+        .contact-form-group textarea:focus {
+            border-color: #3b82f6;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+            outline: none;
+        }
+
+        .contact-submit {
+            width: 100%;
+            padding: 14px 20px;
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+            color: white;
+            font-weight: 700;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 8px;
+        }
+
+        .contact-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(2, 6, 23, 0.2);
+        }
+
+        .contact-submit:active {
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-900">
@@ -614,15 +728,25 @@
     <div id="modalContact" class="modal" onclick="closeModal('modalContact')">
         <div class="modal-content" onclick="event.stopPropagation()">
             <span class="close" onclick="closeModal('modalContact')">&times;</span>
-            <div class="mb-8 text-center">
-                <h2 class="text-2xl font-black italic uppercase tracking-tighter">Hablemos</h2>
-                <p class="text-slate-500 text-sm">ppascual2005@gmail.com</p>
+            <div class="contact-modal-header">
+                <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                <h2>Hablemos</h2>
+                <p>ppascual2005@gmail.com</p>
             </div>
-            <form class="space-y-4">
-                <input type="text" placeholder="Tu nombre" required>
-                <input type="email" placeholder="Tu email" required>
-                <textarea rows="4" placeholder="¿En qué puedo ayudarte?" required></textarea>
-                <button type="button" onclick="closeModal('modalContact')" class="w-full bg-blue-600 text-white font-bold py-4 rounded-xl hover:bg-blue-700 transition">Enviar</button>
+            <form>
+                <div class="contact-form-group">
+                    <label for="nombre">Tu nombre</label>
+                    <input type="text" id="nombre" placeholder="Nombre completo" required>
+                </div>
+                <div class="contact-form-group">
+                    <label for="email">Tu email</label>
+                    <input type="email" id="email" placeholder="tu@email.com" required>
+                </div>
+                <div class="contact-form-group">
+                    <label for="mensaje">Mensaje</label>
+                    <textarea id="mensaje" rows="4" placeholder="¿En qué puedo ayudarte?" required></textarea>
+                </div>
+                <button type="button" class="contact-submit" onclick="closeModal('modalContact')">Enviar Mensaje</button>
             </form>
         </div>
     </div>
