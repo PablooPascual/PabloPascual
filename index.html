@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pablo Pascual | Ingeniería Informática & Ciberseguridad</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        .hero-bg {
+            background-color: #0f172a;
+            background-image: radial-gradient(circle at 50% 50%, #1e293b 0%, #0f172a 100%);
+        }
+
+        .skill-tag {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            color: #60a5fa;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(8px);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5vh auto;
+            padding: 40px;
+            border-radius: 24px;
+            width: 90%;
+            max-width: 550px;
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .close {
+            position: absolute;
+            right: 24px;
+            top: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #94a3b8;
+            transition: color 0.2s;
+        }
+
+        .close:hover {
+            color: #0f172a;
+        }
+
+        .profile-frame {
+            position: relative;
+            width: 320px;
+            height: 380px;
+        }
+
+        .profile-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 24px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .profile-frame::after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: -20px;
+            bottom: -20px;
+            border: 2px solid #3b82f6;
+            border-radius: 24px;
+            z-index: 1;
+        }
+
+        .sport-card {
+            background: linear-gradient(to bottom right, #ffffff, #f8fafc);
+            transition: all 0.3s ease;
+        }
+
+        .sport-card:hover {
+            border-color: #3b82f6;
+            transform: translateY(-5px);
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            margin-top: 6px;
+            outline: none;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900">
+
+    <!-- Navegación -->
+    <nav class="fixed w-full z-50 bg-[#0f172a]/90 backdrop-blur-md border-b border-slate-800 text-white">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <span class="text-lg font-black tracking-tighter uppercase">PABLO <span class="text-blue-500">PASCUAL</span></span>
+            <div class="hidden md:flex space-x-8 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
+                <a href="#inicio" class="hover:text-white transition">Inicio</a>
+                <a href="#skills" class="hover:text-white transition">Habilidades</a>
+                <a href="#formacion" class="hover:text-white transition">Estudios</a>
+                <a href="#radio" class="hover:text-white transition">Radio</a>
+                <a href="#personal" class="hover:text-white transition">Personal</a>
+            </div>
+            <button onclick="openModal('modalContact')" class="bg-blue-600 text-white px-4 py-2 rounded font-bold text-xs hover:bg-blue-700 transition uppercase">
+                Contacto
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero-bg min-h-screen flex items-center pt-20 text-white overflow-hidden">
+        <div class="max-w-6xl mx-auto px-6 w-full">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div>
+                    <div class="flex items-center space-x-3 mb-6">
+                        <span class="px-2 py-1 bg-blue-600 text-[10px] font-black uppercase tracking-widest rounded">Zaragoza 2026</span>
+                        <span class="text-slate-400 text-xs font-medium tracking-wide italic">Ingeniero Informático & Ciberseguridad</span>
+                    </div>
+                    <h1 class="text-5xl md:text-7xl font-extrabold mb-6 tracking-tight">Pablo Pascual <br> Cáceres</h1>
+                    <p class="text-xl text-slate-400 leading-relaxed mb-10 max-w-lg">
+                        Especialista en <span class="text-white font-semibold">Ciberseguridad</span> y análisis de malware. 
+                        Resolución de problemas mediante algoritmia y sistemas de alto rendimiento.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="https://www.linkedin.com/in/pablo-pascual-c%C3%A1ceres-239143249/" target="_blank" class="bg-blue-600 text-white px-8 py-4 rounded-xl font-bold hover:bg-blue-700 transition shadow-lg flex items-center justify-center space-x-3 w-full sm:w-auto">
+                            <i class="fab fa-linkedin text-xl"></i>
+                            <span>LinkedIn</span>
+                        </a>
+                        <button onclick="openModal('modalContact')" class="flex items-center justify-center space-x-3 border border-slate-700 px-8 py-4 rounded-xl font-bold hover:bg-slate-800 transition w-full sm:w-auto">
+                            <i class="fas fa-envelope text-blue-400 text-lg"></i>
+                            <span>Contacto</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="hidden md:flex justify-center items-center">
+                    <div class="profile-frame">
+                        <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=3000&auto=format&fit=crop" alt="Foto de Pablo Pascual">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Habilidades Tecnológicas -->
+    <section id="skills" class="py-24 bg-white">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid md:grid-cols-12 gap-12">
+                <div class="md:col-span-4">
+                    <h2 class="text-3xl font-black mb-6 uppercase tracking-tighter italic">Stack <br><span class="text-blue-600">Tecnológico</span></h2>
+                    <p class="text-slate-600 leading-relaxed mb-6">Base sólida en lenguajes de bajo nivel y arquitectura de sistemas complejos.</p>
+                </div>
+                <div class="md:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="font-black text-xs uppercase tracking-widest text-slate-400 mb-4 flex items-center"><i class="fas fa-code mr-2 text-blue-500"></i> Desarrollo</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="skill-tag">C++</span><span class="skill-tag">Python</span><span class="skill-tag">Node.js</span><span class="skill-tag">Java</span><span class="skill-tag">JavaScript</span><span class="skill-tag">Haskell</span><span class="skill-tag">Golang</span><span class="skill-tag">HTML/CSS</span>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="font-black text-xs uppercase tracking-widest text-slate-400 mb-4 flex items-center"><i class="fas fa-user-secret mr-2 text-blue-500"></i> Ciberseguridad</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="skill-tag bg-blue-600/10 border-blue-600/30 text-blue-600">Análisis de Malware</span><span class="skill-tag bg-blue-600/10 border-blue-600/30 text-blue-600">Forense Digital</span><span class="skill-tag bg-blue-600/10 border-blue-600/30 text-blue-600">Seguridad de Redes</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Formación Académica -->
+    <section id="formacion" class="py-24 bg-slate-50 border-y border-slate-200">
+        <div class="max-w-6xl mx-auto px-6">
+            <h2 class="text-2xl font-black mb-12 text-center uppercase tracking-widest italic">Formación y Certificaciones</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- UNIZAR -->
+                <div onclick="openModal('modalUnizar')" class="cursor-pointer bg-white p-6 rounded-2xl border border-slate-100 hover:shadow-xl transition duration-300">
+                    <h3 class="font-bold text-slate-900 leading-tight">Ingeniería Informática</h3>
+                    <p class="text-slate-400 text-xs mt-1">UNIZAR</p>
+                    <p class="mt-4 text-[10px] text-blue-500 font-black uppercase tracking-widest">Ver Título</p>
+                </div>
+                <!-- Forense -->
+                <div onclick="openModal('modalForense')" class="cursor-pointer bg-white p-6 rounded-2xl border border-slate-100 hover:shadow-xl transition duration-300">
+                    <h3 class="font-bold text-slate-900 leading-tight">Análisis Forense Digital</h3>
+                    <p class="text-slate-400 text-xs mt-1">Microcredencial Universitaria</p>
+                    <p class="mt-4 text-[10px] text-blue-500 font-black uppercase tracking-widest">Ver Título</p>
+                </div>
+                <!-- Malware -->
+                <div onclick="openModal('modalMalware')" class="cursor-pointer bg-white p-6 rounded-2xl border border-slate-100 hover:shadow-xl transition duration-300">
+                    <h3 class="font-bold text-slate-900 leading-tight">Análisis de Malware</h3>
+                    <p class="text-slate-400 text-xs mt-1">Cátedra Ciberseguridad</p>
+                    <p class="mt-4 text-[10px] text-blue-500 font-black uppercase tracking-widest">Ver Título</p>
+                </div>
+                <!-- English -->
+                <div onclick="openModal('modalEnglish')" class="cursor-pointer bg-slate-900 p-6 rounded-2xl text-white hover:scale-105 transition duration-300">
+                    <h3 class="font-bold leading-tight">B2 English First</h3>
+                    <p class="text-slate-500 text-xs mt-1">Cambridge Assessment</p>
+                    <p class="mt-4 text-[10px] text-blue-400 font-black uppercase tracking-widest">Certificado</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Divulgación Radio -->
+    <section id="radio" class="py-24 bg-white">
+        <div class="max-w-4xl mx-auto px-6">
+            <h2 class="text-3xl font-black mb-12 text-center uppercase tracking-tighter italic">Divulgación en <span class="text-blue-600">COPE</span></h2>
+            <div class="space-y-6">
+                <div class="bg-slate-50 p-6 rounded-3xl border border-slate-200">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-4">
+                        <h4 class="font-bold text-lg">Peligros de los Códigos QR</h4>
+                        <a href="https://www.linkedin.com/feed/update/urn:li:activity:7443562420708528128/" target="_blank" class="text-xs font-black text-blue-600 hover:text-blue-800 transition uppercase tracking-widest flex items-center">
+                            <i class="fas fa-external-link-alt mr-2"></i> Ver Publicación
+                        </a>
+                    </div>
+                    <audio controls class="w-full"><source src="#" type="audio/mpeg"></audio>
+                </div>
+                <div class="bg-slate-50 p-6 rounded-3xl border border-slate-200">
+                    <h4 class="font-bold text-lg mb-4">WiFi Públicas: Riesgos</h4>
+                    <audio controls class="w-full"><source src="#" type="audio/mpeg"></audio>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Personal: Al final -->
+    <section id="personal" class="py-24 bg-slate-50 border-t border-slate-200">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/2">
+                    <h2 class="text-4xl font-black mb-6 italic uppercase tracking-tighter">Más allá del <span class="text-blue-600">Código</span></h2>
+                    <p class="text-slate-600 text-lg leading-relaxed mb-8">
+                        Entiendo la disciplina deportiva como el pilar fundamental para el rendimiento intelectual. Mi pasión por el deporte me ha llevado a desarrollar roles de liderazgo y superación personal que aplico diariamente en la ingeniería.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                        <div class="sport-card p-6 rounded-2xl border border-slate-100 flex items-start space-x-4">
+                            <div class="text-blue-600 text-2xl mt-1"><i class="fas fa-mitten"></i></div>
+                            <div>
+                                <h4 class="font-bold text-slate-900">Entrenador de Porteros</h4>
+                                <p class="text-slate-500 text-xs">Gestión de talento y alto rendimiento.</p>
+                            </div>
+                        </div>
+                        <div class="sport-card p-6 rounded-2xl border border-slate-100 flex items-start space-x-4">
+                            <div class="text-blue-600 text-2xl mt-1"><i class="fas fa-running"></i></div>
+                            <div>
+                                <h4 class="font-bold text-slate-900">Runner de Distancia</h4>
+                                <p class="text-slate-500 text-xs">Finisher de Media Maratón (21K).</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Diplomas Deportivos -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div onclick="openModal('modalUefa')" class="cursor-pointer bg-blue-600 p-4 rounded-xl text-white text-center hover:bg-blue-700 transition">
+                            <span class="text-[10px] font-black uppercase tracking-widest">UEFA Goalkeeper C</span>
+                        </div>
+                        <div onclick="openModal('modalMaraton')" class="cursor-pointer bg-white border border-slate-200 p-4 rounded-xl text-center hover:border-blue-500 transition">
+                            <span class="text-[10px] font-black uppercase tracking-widest text-slate-500">Diploma Media Maratón</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:w-1/2 grid grid-cols-2 gap-4">
+                    <div class="bg-slate-200 rounded-3xl h-64 overflow-hidden relative group cursor-pointer" onclick="openModal('modalUefa')">
+                        <img src="https://images.unsplash.com/photo-1510566337590-2fc1f21d0faa?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-500" alt="Portero entrenamiento">
+                        <div class="absolute inset-0 bg-blue-600/10 group-hover:bg-transparent"></div>
+                    </div>
+                    <div class="bg-slate-200 rounded-3xl h-64 overflow-hidden relative group mt-8 cursor-pointer" onclick="openModal('modalMaraton')">
+                        <img src="https://images.unsplash.com/photo-1452626038306-9aae5e071dd3?q=80&w=2074&auto=format&fit=crop" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-500" alt="Maratón">
+                        <div class="absolute inset-0 bg-blue-600/10 group-hover:bg-transparent"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal de Contacto -->
+    <div id="modalContact" class="modal" onclick="closeModal('modalContact')">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <span class="close" onclick="closeModal('modalContact')">&times;</span>
+            <div class="mb-8 text-center">
+                <h2 class="text-2xl font-black italic uppercase tracking-tighter">Hablemos</h2>
+                <p class="text-slate-500 text-sm">ppascual2005@gmail.com</p>
+            </div>
+            <form class="space-y-4">
+                <input type="text" placeholder="Tu nombre" required>
+                <input type="email" placeholder="Tu email" required>
+                <textarea rows="4" placeholder="¿En qué puedo ayudarte?" required></textarea>
+                <button type="button" onclick="closeModal('modalContact')" class="w-full bg-blue-600 text-white font-bold py-4 rounded-xl hover:bg-blue-700 transition">Enviar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modales Diplomas -->
+    <div id="modalUnizar" class="modal" onclick="closeModal('modalUnizar')"><div class="modal-content"><span class="close" onclick="closeModal('modalUnizar')">&times;</span><h2 class="text-2xl font-bold">Grado Ingeniería Informática</h2><div class="w-full h-48 bg-slate-100 rounded-xl flex items-center justify-center border-2 border-dashed border-slate-300 italic text-slate-400">Diploma UNIZAR</div></div></div>
+    <div id="modalUefa" class="modal" onclick="closeModal('modalUefa')"><div class="modal-content"><span class="close" onclick="closeModal('modalUefa')">&times;</span><h2 class="text-2xl font-bold">Certificación UEFA Goalkeeper C</h2><div class="w-full h-48 bg-slate-100 rounded-xl flex items-center justify-center border-2 border-dashed border-slate-300 italic text-slate-400 text-center p-8">Diploma Oficial Federativo de Entrenador de Porteros</div></div></div>
+    <div id="modalMaraton" class="modal" onclick="closeModal('modalMaraton')"><div class="modal-content"><span class="close" onclick="closeModal('modalMaraton')">&times;</span><h2 class="text-2xl font-bold text-blue-600">Finisher Media Maratón</h2><div class="w-full h-48 bg-slate-100 rounded-xl flex items-center justify-center border-2 border-dashed border-slate-300 italic text-slate-400 text-center p-8">Diploma acreditativo: 21.097 KM - Zaragoza</div></div></div>
+    <div id="modalForense" class="modal" onclick="closeModal('modalForense')"><div class="modal-content"><span class="close" onclick="closeModal('modalForense')">&times;</span><h2 class="text-2xl font-bold">Forense Digital</h2><div class="w-full h-48 bg-slate-100 rounded-xl flex items-center justify-center border-2 border-dashed border-slate-300 italic text-slate-400">Microcredencial Universitaria</div></div></div>
+    <div id="modalMalware" class="modal" onclick="closeModal('modalMalware')"><div class="modal-content"><span class="close" onclick="closeModal('modalMalware')">&times;</span><h2 class="text-2xl font-bold">Análisis de Malware</h2><div class="w-full h-48 bg-slate-100 rounded-xl flex items-center justify-center border-2 border-dashed border-slate-300 italic text-slate-400">Microcredencial Ciberseguridad</div></div></div>
+    <div id="modalEnglish" class="modal" onclick="closeModal('modalEnglish')"><div class="modal-content"><span class="close" onclick="closeModal('modalEnglish')">&times;</span><h2 class="text-2xl font-bold">B2 English First</h2><div class="w-full h-48 bg-slate-100 rounded-xl flex items-center justify-center border-2 border-dashed border-slate-300 italic text-slate-400">Cambridge Certification</div></div></div>
+
+    <footer class="py-12 bg-slate-950 text-slate-600 text-center text-[10px] font-bold uppercase tracking-[0.4em]">
+        Pablo Pascual · Zaragoza 2026 · Ciberseguridad & Deporte
+    </footer>
+
+    <script>
+        function openModal(id) { document.getElementById(id).style.display = 'block'; }
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+        window.onclick = function(event) { if (event.target.className === 'modal') { event.target.style.display = "none"; } }
+    </script>
+</body>
+</html>
