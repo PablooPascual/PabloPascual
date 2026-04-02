@@ -7,16 +7,72 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Bebas+Neue&display=swap');
+
+        :root {
+            --ink: #0f172a;
+            --deep: #020617;
+            --line: #1e293b;
+            --accent: #0ea5e9;
+            --accent-2: #22d3ee;
+            --paper: #f8fafc;
+        }
         
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Sora', sans-serif;
             scroll-behavior: smooth;
+            background: radial-gradient(circle at 15% 10%, #e0f2fe 0%, #f8fafc 45%);
+        }
+
+        .cursor-shadow {
+            position: fixed;
+            width: 180px;
+            height: 180px;
+            left: 0;
+            top: 0;
+            pointer-events: none;
+            border-radius: 999px;
+            background: radial-gradient(circle, rgba(2, 6, 23, 0.2) 0%, rgba(2, 6, 23, 0.08) 35%, rgba(2, 6, 23, 0) 70%);
+            filter: blur(8px);
+            transform: translate(-50%, -50%);
+            z-index: 40;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        section {
+            scroll-margin-top: 88px;
+        }
+
+        h1, h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 0.03em;
         }
 
         .hero-bg {
-            background-color: #0f172a;
-            background-image: radial-gradient(circle at 50% 50%, #1e293b 0%, #0f172a 100%);
+            position: relative;
+            background-color: var(--ink);
+            background-image: radial-gradient(circle at 20% 20%, #0b2a4a 0%, #091427 40%, #020617 100%);
+        }
+
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 75% 30%, rgba(34, 211, 238, 0.22), transparent 35%),
+                radial-gradient(circle at 15% 80%, rgba(14, 165, 233, 0.24), transparent 40%);
+            pointer-events: none;
+        }
+
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(transparent 96%, rgba(148, 163, 184, 0.15) 100%);
+            background-size: 100% 42px;
+            opacity: 0.35;
+            pointer-events: none;
         }
 
         .skill-tag {
@@ -53,6 +109,7 @@
             max-height: 90vh;
             overflow-y: auto;
             animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 30px 80px rgba(2, 6, 23, 0.25);
         }
 
         @keyframes slideIn {
@@ -111,6 +168,136 @@
             transform: translateY(-5px);
         }
 
+        .interactive-card {
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+        }
+
+        .interactive-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 40px rgba(15, 23, 42, 0.12);
+        }
+
+        .cert-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            border-radius: 999px;
+            padding: 6px 10px;
+        }
+
+        .chip-sport { background: #e0f2fe; color: #0369a1; }
+        .chip-bank { background: #fef3c7; color: #b45309; }
+        .chip-study { background: #ede9fe; color: #6d28d9; }
+        .chip-pending { background: #e2e8f0; color: #334155; }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: revealUp 0.75s ease forwards;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+
+        @keyframes revealUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .mobile-menu {
+            display: none;
+            background: rgba(2, 6, 23, 0.97);
+            border-bottom: 1px solid #1e293b;
+        }
+
+        .mobile-menu.open {
+            display: block;
+            animation: slideDown 0.25s ease;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        audio {
+            border-radius: 14px;
+            height: 42px;
+        }
+
+        @media (max-width: 768px) {
+            .cursor-shadow {
+                display: none;
+            }
+
+            .modal-content {
+                width: 96%;
+                margin: 2vh auto;
+                padding: 24px;
+                max-height: 96vh;
+            }
+
+            .profile-frame {
+                width: 260px;
+                height: 320px;
+            }
+
+            .profile-frame::after {
+                display: none;
+            }
+
+            .hero-bg {
+                min-height: 100svh;
+            }
+
+            .hero-title {
+                font-size: 3.2rem;
+                line-height: 0.95;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+                line-height: 1.6;
+            }
+
+            .section-tight {
+                padding-top: 5rem;
+                padding-bottom: 5rem;
+            }
+
+            .mobile-stack {
+                grid-template-columns: 1fr;
+            }
+
+            .mobile-no-offset {
+                margin-top: 0;
+            }
+
+            .pdf-frame {
+                height: 62vh;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .modal-content {
+                max-width: 900px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+
         input, textarea {
             width: 100%;
             padding: 12px 16px;
@@ -132,25 +319,41 @@
                 <a href="#skills" class="hover:text-white transition">Habilidades</a>
                 <a href="#formacion" class="hover:text-white transition">Estudios</a>
                 <a href="#radio" class="hover:text-white transition">Radio</a>
+                <a href="#certificados" class="hover:text-white transition">Certificados</a>
                 <a href="#personal" class="hover:text-white transition">Personal</a>
             </div>
-            <button onclick="openModal('modalContact')" class="bg-blue-600 text-white px-4 py-2 rounded font-bold text-xs hover:bg-blue-700 transition uppercase">
-                Contacto
-            </button>
+            <div class="flex items-center gap-3">
+                <button onclick="openModal('modalContact')" class="bg-blue-600 text-white px-4 py-2 rounded font-bold text-xs hover:bg-blue-700 transition uppercase">
+                    Contacto
+                </button>
+                <button onclick="toggleMobileMenu()" class="md:hidden text-slate-300 hover:text-white transition" aria-label="Abrir menú">
+                    <i class="fas fa-bars text-lg"></i>
+                </button>
+            </div>
+        </div>
+        <div id="mobileMenu" class="mobile-menu md:hidden">
+            <div class="px-6 py-4 flex flex-col gap-3 text-xs font-black uppercase tracking-[0.2em] text-slate-300">
+                <a href="#inicio" onclick="toggleMobileMenu()">Inicio</a>
+                <a href="#skills" onclick="toggleMobileMenu()">Habilidades</a>
+                <a href="#formacion" onclick="toggleMobileMenu()">Estudios</a>
+                <a href="#radio" onclick="toggleMobileMenu()">Radio</a>
+                <a href="#certificados" onclick="toggleMobileMenu()">Certificados</a>
+                <a href="#personal" onclick="toggleMobileMenu()">Personal</a>
+            </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="inicio" class="hero-bg min-h-screen flex items-center pt-20 text-white overflow-hidden">
-        <div class="max-w-6xl mx-auto px-6 w-full">
+    <section id="inicio" class="hero-bg min-h-screen flex items-center pt-24 md:pt-20 text-white overflow-hidden">
+        <div class="max-w-6xl mx-auto px-4 md:px-6 w-full">
             <div class="grid md:grid-cols-2 gap-16 items-center">
-                <div>
-                    <div class="flex items-center space-x-3 mb-6">
+                <div class="reveal">
+                    <div class="flex items-center space-x-3 mb-6 reveal delay-1">
                         <span class="px-2 py-1 bg-blue-600 text-[10px] font-black uppercase tracking-widest rounded">Zaragoza 2026</span>
-                        <span class="text-slate-400 text-xs font-medium tracking-wide italic">Ingeniero Informático & Ciberseguridad</span>
+                        <span class="text-cyan-300 text-xs font-medium tracking-wide italic">Ingeniero Informático & Ciberseguridad</span>
                     </div>
-                    <h1 class="text-5xl md:text-7xl font-extrabold mb-6 tracking-tight">Pablo Pascual <br> Cáceres</h1>
-                    <p class="text-xl text-slate-400 leading-relaxed mb-10 max-w-lg">
+                    <h1 class="hero-title text-6xl md:text-8xl font-extrabold mb-6 tracking-tight reveal delay-2">Pablo Pascual <br> Cáceres</h1>
+                    <p class="hero-subtitle text-xl text-slate-300 leading-relaxed mb-10 max-w-lg reveal delay-3">
                         Especialista en <span class="text-white font-semibold">Ciberseguridad</span> y análisis de malware. 
                         Resolución de problemas mediante algoritmia y sistemas de alto rendimiento.
                     </p>
@@ -165,9 +368,9 @@
                         </button>
                     </div>
                 </div>
-                <div class="hidden md:flex justify-center items-center">
+                <div class="hidden md:flex justify-center items-center reveal delay-2">
                     <div class="profile-frame">
-                        <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=3000&auto=format&fit=crop" alt="Foto de Pablo Pascual">
+                        <img src="FOTOPABLO.png" alt="Foto de Pablo Pascual">
                     </div>
                 </div>
             </div>
@@ -175,7 +378,7 @@
     </section>
 
     <!-- Habilidades Tecnológicas -->
-    <section id="skills" class="py-24 bg-white">
+    <section id="skills" class="section-tight py-24 bg-white">
         <div class="max-w-6xl mx-auto px-6">
             <div class="grid md:grid-cols-12 gap-12">
                 <div class="md:col-span-4">
@@ -201,7 +404,7 @@
     </section>
 
     <!-- Formación Académica -->
-    <section id="formacion" class="py-24 bg-slate-50 border-y border-slate-200">
+    <section id="formacion" class="section-tight py-24 bg-slate-50 border-y border-slate-200">
         <div class="max-w-6xl mx-auto px-6">
             <h2 class="text-2xl font-black mb-12 text-center uppercase tracking-widest italic">Formación y Certificaciones</h2>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -234,7 +437,7 @@
     </section>
 
     <!-- Divulgación Radio -->
-    <section id="radio" class="py-24 bg-white">
+    <section id="radio" class="section-tight py-24 bg-white">
         <div class="max-w-4xl mx-auto px-6">
             <h2 class="text-3xl font-black mb-12 text-center uppercase tracking-tighter italic">Divulgación en <span class="text-blue-600">COPE</span></h2>
             <div class="space-y-6">
@@ -245,18 +448,56 @@
                             <i class="fas fa-external-link-alt mr-2"></i> Ver Publicación
                         </a>
                     </div>
-                    <audio controls class="w-full"><source src="#" type="audio/mpeg"></audio>
+                    <audio controls class="w-full"><source src="RADIO/PabloCOPEQR.mp3" type="audio/mpeg"></audio>
                 </div>
                 <div class="bg-slate-50 p-6 rounded-3xl border border-slate-200">
                     <h4 class="font-bold text-lg mb-4">WiFi Públicas: Riesgos</h4>
-                    <audio controls class="w-full"><source src="#" type="audio/mpeg"></audio>
+                    <audio controls class="w-full"><source src="RADIO/PABLOCOPEWIFI.mp3" type="audio/mpeg"></audio>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificados -->
+    <section id="certificados" class="section-tight py-24 bg-slate-50 border-y border-slate-200">
+        <div class="max-w-6xl mx-auto px-6">
+            <h2 class="text-3xl font-black mb-12 text-center uppercase tracking-tighter italic">Certificados</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div onclick="openModal('modalUefaGK')" class="interactive-card cursor-pointer bg-white p-6 rounded-2xl border border-slate-100">
+                    <span class="cert-chip chip-sport mb-3"><i class="fas fa-mitten"></i> Deporte</span>
+                    <h3 class="font-bold text-slate-900 leading-tight">UEFA GK C</h3>
+                    <p class="text-slate-400 text-xs mt-1">Porteros</p>
+                    <p class="mt-4 text-[10px] text-blue-500 font-black uppercase tracking-widest">Ver Certificado</p>
+                </div>
+                <div onclick="openModal('modalUefaC')" class="interactive-card cursor-pointer bg-white p-6 rounded-2xl border border-slate-100">
+                    <span class="cert-chip chip-study mb-3"><i class="fas fa-chalkboard-user"></i> Formación</span>
+                    <h3 class="font-bold text-slate-900 leading-tight">UEFA C</h3>
+                    <p class="text-slate-400 text-xs mt-1">Entrenador de Porteros</p>
+                    <p class="mt-4 text-[10px] text-blue-500 font-black uppercase tracking-widest">Ver Certificado</p>
+                </div>
+                <div onclick="openModal('modalSantander')" class="interactive-card cursor-pointer bg-white p-6 rounded-2xl border border-slate-100">
+                    <span class="cert-chip chip-bank mb-3"><i class="fas fa-building-columns"></i> Banco</span>
+                    <h3 class="font-bold text-slate-900 leading-tight">Beca Santander</h3>
+                    <p class="text-slate-400 text-xs mt-1">Banco Santander</p>
+                    <p class="mt-4 text-[10px] text-blue-500 font-black uppercase tracking-widest">Ver Diploma</p>
+                </div>
+                <div onclick="openModal('modalMaraton')" class="interactive-card cursor-pointer bg-white p-6 rounded-2xl border border-slate-100">
+                    <span class="cert-chip chip-sport mb-3"><i class="fas fa-person-running"></i> Deporte</span>
+                    <h3 class="font-bold text-slate-900 leading-tight">Diploma Media Maratón</h3>
+                    <p class="text-slate-400 text-xs mt-1">Media Maratón</p>
+                    <p class="mt-4 text-[10px] text-blue-500 font-black uppercase tracking-widest">Ver Diploma</p>
+                </div>
+                <div class="bg-slate-100 p-6 rounded-2xl border border-dashed border-slate-300">
+                    <span class="cert-chip chip-pending mb-3"><i class="fas fa-hourglass-half"></i> Pendiente</span>
+                    <h3 class="font-bold text-slate-700 leading-tight">Certificados de Ciberseguridad</h3>
+                    <p class="text-slate-500 text-xs mt-2">Pendiente de añadir. Se deja vacío de momento.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Sección Personal: Al final -->
-    <section id="personal" class="py-24 bg-slate-50 border-t border-slate-200">
+    <section id="personal" class="section-tight py-24 bg-slate-50 border-t border-slate-200">
         <div class="max-w-6xl mx-auto px-6">
             <div class="flex flex-col md:flex-row items-center gap-12">
                 <div class="md:w-1/2">
@@ -282,20 +523,20 @@
                     </div>
                     <!-- Diplomas Deportivos -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div onclick="openModal('modalUefa')" class="cursor-pointer bg-blue-600 p-4 rounded-xl text-white text-center hover:bg-blue-700 transition">
-                            <span class="text-[10px] font-black uppercase tracking-widest">UEFA Goalkeeper C</span>
+                        <div onclick="openModal('modalUefaGK')" class="cursor-pointer bg-blue-600 p-4 rounded-xl text-white text-center hover:bg-blue-700 transition">
+                            <span class="text-[10px] font-black uppercase tracking-widest">UEFA GK C (Porteros)</span>
                         </div>
                         <div onclick="openModal('modalMaraton')" class="cursor-pointer bg-white border border-slate-200 p-4 rounded-xl text-center hover:border-blue-500 transition">
                             <span class="text-[10px] font-black uppercase tracking-widest text-slate-500">Diploma Media Maratón</span>
                         </div>
                     </div>
                 </div>
-                <div class="md:w-1/2 grid grid-cols-2 gap-4">
-                    <div class="bg-slate-200 rounded-3xl h-64 overflow-hidden relative group cursor-pointer" onclick="openModal('modalUefa')">
+                <div class="md:w-1/2 grid grid-cols-2 mobile-stack gap-4">
+                    <div class="bg-slate-200 rounded-3xl h-64 overflow-hidden relative group cursor-pointer" onclick="openModal('modalUefaGK')">
                         <img src="https://images.unsplash.com/photo-1510566337590-2fc1f21d0faa?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-500" alt="Portero entrenamiento">
                         <div class="absolute inset-0 bg-blue-600/10 group-hover:bg-transparent"></div>
                     </div>
-                    <div class="bg-slate-200 rounded-3xl h-64 overflow-hidden relative group mt-8 cursor-pointer" onclick="openModal('modalMaraton')">
+                    <div class="bg-slate-200 rounded-3xl h-64 overflow-hidden relative group mt-8 md:mt-8 mobile-no-offset cursor-pointer" onclick="openModal('modalMaraton')">
                         <img src="https://images.unsplash.com/photo-1452626038306-9aae5e071dd3?q=80&w=2074&auto=format&fit=crop" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-500" alt="Maratón">
                         <div class="absolute inset-0 bg-blue-600/10 group-hover:bg-transparent"></div>
                     </div>
@@ -323,8 +564,10 @@
 
     <!-- Modales Diplomas -->
     <div id="modalUnizar" class="modal" onclick="closeModal('modalUnizar')"><div class="modal-content"><span class="close" onclick="closeModal('modalUnizar')">&times;</span><h2 class="text-2xl font-bold">Grado Ingeniería Informática</h2><div class="w-full h-48 bg-slate-100 rounded-xl flex items-center justify-center border-2 border-dashed border-slate-300 italic text-slate-400">Diploma UNIZAR</div></div></div>
-    <div id="modalUefa" class="modal" onclick="closeModal('modalUefa')"><div class="modal-content"><span class="close" onclick="closeModal('modalUefa')">&times;</span><h2 class="text-2xl font-bold">Certificación UEFA Goalkeeper C</h2><div class="w-full h-48 bg-slate-100 rounded-xl flex items-center justify-center border-2 border-dashed border-slate-300 italic text-slate-400 text-center p-8">Diploma Oficial Federativo de Entrenador de Porteros</div></div></div>
-    <div id="modalMaraton" class="modal" onclick="closeModal('modalMaraton')"><div class="modal-content"><span class="close" onclick="closeModal('modalMaraton')">&times;</span><h2 class="text-2xl font-bold text-blue-600">Finisher Media Maratón</h2><div class="w-full h-48 bg-slate-100 rounded-xl flex items-center justify-center border-2 border-dashed border-slate-300 italic text-slate-400 text-center p-8">Diploma acreditativo: 21.097 KM - Zaragoza</div></div></div>
+    <div id="modalUefaGK" class="modal" onclick="closeModal('modalUefaGK')"><div class="modal-content"><span class="close" onclick="closeModal('modalUefaGK')">&times;</span><h2 class="text-2xl font-bold">UEFA GK C - Porteros</h2><iframe src="CERTIFICADOS/TITULOGKC.pdf" class="pdf-frame w-full h-[72vh] rounded-xl border border-slate-200 mt-4"></iframe></div></div>
+    <div id="modalUefaC" class="modal" onclick="closeModal('modalUefaC')"><div class="modal-content"><span class="close" onclick="closeModal('modalUefaC')">&times;</span><h2 class="text-2xl font-bold">UEFA C - Entrenador de Porteros</h2><iframe src="CERTIFICADOS/UEFAC.pdf" class="pdf-frame w-full h-[72vh] rounded-xl border border-slate-200 mt-4"></iframe></div></div>
+    <div id="modalSantander" class="modal" onclick="closeModal('modalSantander')"><div class="modal-content"><span class="close" onclick="closeModal('modalSantander')">&times;</span><h2 class="text-2xl font-bold">Diploma Beca Santander</h2><img src="CERTIFICADOS/BECA SANTANDER DIPLOMA.png" alt="Diploma Beca Santander" class="w-full rounded-xl border border-slate-200 mt-4"></div></div>
+    <div id="modalMaraton" class="modal" onclick="closeModal('modalMaraton')"><div class="modal-content"><span class="close" onclick="closeModal('modalMaraton')">&times;</span><h2 class="text-2xl font-bold text-blue-600">Finisher Media Maratón</h2><img src="CERTIFICADOS/DIPLOMAMARATON.jpg" alt="Diploma Media Maratón" class="w-full rounded-xl border border-slate-200 mt-4"></div></div>
     <div id="modalForense" class="modal" onclick="closeModal('modalForense')"><div class="modal-content"><span class="close" onclick="closeModal('modalForense')">&times;</span><h2 class="text-2xl font-bold">Forense Digital</h2><div class="w-full h-48 bg-slate-100 rounded-xl flex items-center justify-center border-2 border-dashed border-slate-300 italic text-slate-400">Microcredencial Universitaria</div></div></div>
     <div id="modalMalware" class="modal" onclick="closeModal('modalMalware')"><div class="modal-content"><span class="close" onclick="closeModal('modalMalware')">&times;</span><h2 class="text-2xl font-bold">Análisis de Malware</h2><div class="w-full h-48 bg-slate-100 rounded-xl flex items-center justify-center border-2 border-dashed border-slate-300 italic text-slate-400">Microcredencial Ciberseguridad</div></div></div>
     <div id="modalEnglish" class="modal" onclick="closeModal('modalEnglish')"><div class="modal-content"><span class="close" onclick="closeModal('modalEnglish')">&times;</span><h2 class="text-2xl font-bold">B2 English First</h2><div class="w-full h-48 bg-slate-100 rounded-xl flex items-center justify-center border-2 border-dashed border-slate-300 italic text-slate-400">Cambridge Certification</div></div></div>
@@ -333,10 +576,29 @@
         Pablo Pascual · Zaragoza 2026 · Ciberseguridad & Deporte
     </footer>
 
+    <div id="cursorShadow" class="cursor-shadow"></div>
+
     <script>
         function openModal(id) { document.getElementById(id).style.display = 'block'; }
         function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+        function toggleMobileMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
         window.onclick = function(event) { if (event.target.className === 'modal') { event.target.style.display = "none"; } }
+        window.addEventListener('resize', function () {
+            if (window.innerWidth >= 768) {
+                document.getElementById('mobileMenu').classList.remove('open');
+            }
+        });
+
+        const cursorShadow = document.getElementById('cursorShadow');
+        document.addEventListener('mousemove', function (event) {
+            cursorShadow.style.left = event.clientX + 'px';
+            cursorShadow.style.top = event.clientY + 'px';
+            cursorShadow.style.opacity = '1';
+        });
+
+        document.addEventListener('mouseleave', function () {
+            cursorShadow.style.opacity = '0';
+        });
     </script>
 </body>
 </html>
