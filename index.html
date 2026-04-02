@@ -22,6 +22,7 @@
             font-family: 'Sora', sans-serif;
             scroll-behavior: smooth;
             background: radial-gradient(circle at 15% 10%, #e0f2fe 0%, #f8fafc 45%);
+            overflow-x: hidden;
         }
 
         .cursor-shadow {
@@ -182,6 +183,13 @@
             background: linear-gradient(145deg, #f8fafc 0%, #ecfeff 100%);
         }
 
+        .radio-cover {
+            width: 100%;
+            height: 9rem;
+            object-fit: cover;
+            border-radius: 1rem;
+        }
+
         .cert-chip {
             display: inline-flex;
             align-items: center;
@@ -288,6 +296,65 @@
             .pdf-frame {
                 height: 62vh;
             }
+
+            .radio-square {
+                aspect-ratio: auto;
+                min-height: auto;
+            }
+
+            .radio-cover {
+                height: 7.5rem;
+            }
+
+            .hero-title {
+                font-size: 2.85rem;
+            }
+
+            .section-tight {
+                padding-top: 4rem;
+                padding-bottom: 4rem;
+            }
+
+            .max-w-6xl, .max-w-4xl {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .modal-content {
+                width: 98%;
+                padding: 18px;
+                margin: 1vh auto;
+            }
+
+            .hero-title {
+                font-size: 2.35rem;
+                line-height: 0.95;
+            }
+
+            .hero-subtitle {
+                font-size: 0.95rem;
+            }
+
+            .profile-frame {
+                width: 220px;
+                height: 280px;
+            }
+
+            .radio-cover {
+                height: 6.5rem;
+            }
+
+            .grid.md\:grid-cols-2.gap-6,
+            .grid.md\:grid-cols-2.lg\:grid-cols-3.gap-6,
+            .grid.md\:grid-cols-2.gap-6.max-w-4xl.mx-auto {
+                gap: 1rem;
+            }
+
+            .px-6 {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
         }
 
         @media (min-width: 1200px) {
@@ -352,17 +419,17 @@
     <section id="inicio" class="hero-bg min-h-screen flex items-center pt-24 md:pt-20 text-white overflow-hidden">
         <div class="max-w-6xl mx-auto px-4 md:px-6 w-full">
             <div class="grid md:grid-cols-2 gap-16 items-center">
-                <div class="reveal">
+                <div class="reveal text-center md:text-left">
                     <div class="flex items-center space-x-3 mb-6 reveal delay-1">
                         <span class="px-2 py-1 bg-blue-600 text-[10px] font-black uppercase tracking-widest rounded">Zaragoza 2026</span>
                         <span class="text-cyan-300 text-xs font-medium tracking-wide italic">Ingeniero Informático & Ciberseguridad</span>
                     </div>
                     <h1 class="hero-title text-6xl md:text-8xl font-extrabold mb-6 tracking-tight reveal delay-2">Pablo Pascual <br> Cáceres</h1>
-                    <p class="hero-subtitle text-xl text-slate-300 leading-relaxed mb-10 max-w-lg reveal delay-3">
+                    <p class="hero-subtitle text-xl text-slate-300 leading-relaxed mb-10 max-w-lg mx-auto md:mx-0 reveal delay-3">
                         Especialista en <span class="text-white font-semibold">Ciberseguridad</span> y análisis de malware. 
                         Resolución de problemas mediante algoritmia y sistemas de alto rendimiento.
                     </p>
-                    <div class="flex flex-col sm:flex-row gap-4">
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
                         <a href="https://www.linkedin.com/in/pablo-pascual-c%C3%A1ceres-239143249/" target="_blank" class="bg-blue-600 text-white px-8 py-4 rounded-xl font-bold hover:bg-blue-700 transition shadow-lg flex items-center justify-center space-x-3 w-full sm:w-auto">
                             <i class="fab fa-linkedin text-xl"></i>
                             <span>LinkedIn</span>
@@ -448,11 +515,11 @@
             <div class="grid md:grid-cols-2 gap-6">
                 <div class="radio-square interactive-card p-6 rounded-3xl border border-slate-200 flex flex-col justify-between">
                     <div>
-                        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop" alt="Ciberseguridad y codigos QR" class="w-full h-36 object-cover rounded-2xl mb-4">
+                        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop" alt="Ciberseguridad y codigos QR" class="radio-cover mb-4">
                         <div class="w-12 h-12 rounded-xl bg-sky-100 text-sky-700 flex items-center justify-center mb-4">
                             <i class="fas fa-qrcode text-xl"></i>
                         </div>
-                        <h4 class="font-bold text-xl mb-3">Peligros de los Códigos QR</h4>
+                        <h4 class="font-bold text-lg sm:text-xl mb-3">Peligros de los Códigos QR</h4>
                         <p class="text-sm text-slate-500 mb-4">Intervención en COPE sobre riesgos habituales y fraudes con QR.</p>
                         <a href="https://www.linkedin.com/feed/update/urn:li:activity:7443562420708528128/" target="_blank" class="text-xs font-black text-blue-600 hover:text-blue-800 transition uppercase tracking-widest flex items-center">
                             <i class="fas fa-external-link-alt mr-2"></i> Ver Publicación
@@ -462,11 +529,11 @@
                 </div>
                 <div class="radio-square interactive-card p-6 rounded-3xl border border-slate-200 flex flex-col justify-between">
                     <div>
-                        <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=1200&auto=format&fit=crop" alt="Redes WiFi y seguridad" class="w-full h-36 object-cover rounded-2xl mb-4">
+                        <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=1200&auto=format&fit=crop" alt="Redes WiFi y seguridad" class="radio-cover mb-4">
                         <div class="w-12 h-12 rounded-xl bg-cyan-100 text-cyan-700 flex items-center justify-center mb-4">
                             <i class="fas fa-wifi text-xl"></i>
                         </div>
-                        <h4 class="font-bold text-xl mb-3">WiFi Públicas: Riesgos</h4>
+                        <h4 class="font-bold text-lg sm:text-xl mb-3">WiFi Públicas: Riesgos</h4>
                         <p class="text-sm text-slate-500 mb-4">Consejos prácticos para conectarte con seguridad fuera de casa o del trabajo.</p>
                     </div>
                     <audio controls class="w-full mt-5"><source src="RADIO/PABLOCOPEWIFI.mp3" type="audio/mpeg"></audio>
@@ -534,7 +601,7 @@
                         <img src="https://images.unsplash.com/photo-1510566337590-2fc1f21d0faa?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-500" alt="Portero entrenamiento">
                         <div class="absolute inset-0 bg-blue-600/10 group-hover:bg-transparent"></div>
                     </div>
-                    <div class="bg-slate-200 rounded-3xl h-64 overflow-hidden relative group mt-8 md:mt-8 mobile-no-offset cursor-pointer" onclick="openModal('modalMaraton')">
+                    <div class="bg-slate-200 rounded-3xl h-56 sm:h-64 overflow-hidden relative group mt-8 md:mt-8 mobile-no-offset cursor-pointer" onclick="openModal('modalMaraton')">
                         <img src="https://images.unsplash.com/photo-1452626038306-9aae5e071dd3?q=80&w=2074&auto=format&fit=crop" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-500" alt="Maratón">
                         <div class="absolute inset-0 bg-blue-600/10 group-hover:bg-transparent"></div>
                     </div>
