@@ -178,16 +178,151 @@
             box-shadow: 0 16px 40px rgba(15, 23, 42, 0.12);
         }
 
-        .radio-square {
-            aspect-ratio: 1 / 1;
-            background: linear-gradient(145deg, #f8fafc 0%, #ecfeff 100%);
+        .radio-player {
+            max-width: 500px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%);
+            border-radius: 2rem;
+            border: 1px solid rgba(3, 105, 161, 0.1);
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(15, 23, 42, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .radio-player:hover {
+            box-shadow: 0 25px 70px rgba(15, 23, 42, 0.15);
+            border-color: rgba(3, 105, 161, 0.2);
+        }
+
+        .radio-cover-container {
+            position: relative;
+            width: 100%;
+            padding: 2rem;
+            background: linear-gradient(135deg, #0369a1 0%, #0ea5e9 100%);
+            overflow: hidden;
+        }
+
+        .radio-cover-container::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 20% 20%, rgba(255,255,255, 0.2), transparent 50%);
         }
 
         .radio-cover {
             width: 100%;
-            height: 9rem;
+            max-width: 250px;
+            aspect-ratio: 1;
             object-fit: cover;
-            border-radius: 1rem;
+            border-radius: 1.25rem;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.2);
+            margin: 0 auto;
+            display: block;
+        }
+
+        .radio-info {
+            padding: 1.5rem;
+            text-align: center;
+            z-index: 10;
+            position: relative;
+        }
+
+        .radio-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 0.5rem;
+        }
+
+        .radio-description {
+            font-size: 0.875rem;
+            color: #64748b;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .radio-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .radio-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #0369a1 0%, #0ea5e9 100%);
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(3, 105, 161, 0.3);
+        }
+
+        .radio-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(3, 105, 161, 0.4);
+        }
+
+        .radio-btn:active {
+            transform: scale(0.95);
+        }
+
+        .radio-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .radio-player audio {
+            width: 100%;
+            height: auto;
+            padding: 0 1.5rem 1.5rem;
+            border-radius: 14px;
+            box-sizing: border-box;
+        }
+
+        .radio-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            padding: 1rem 0;
+        }
+
+        .radio-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(3, 105, 161, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .radio-dot.active {
+            background: #0369a1;
+            transform: scale(1.3);
+        }
+
+        .song-transition {
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .cert-chip {
@@ -626,43 +761,40 @@
     <section id="radio" class="section-tight py-24 bg-white">
         <div class="max-w-6xl mx-auto px-6">
             <h2 class="text-3xl font-black mb-12 text-center uppercase tracking-tighter italic">Divulgación en <span class="text-blue-600">COPE</span></h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="radio-square interactive-card p-6 rounded-3xl border border-slate-200 flex flex-col justify-between">
-                    <div>
-                        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop" alt="Ciberseguridad y codigos QR" class="radio-cover mb-4">
-                        <div class="w-12 h-12 rounded-xl bg-sky-100 text-sky-700 flex items-center justify-center mb-4">
-                            <i class="fas fa-qrcode text-xl"></i>
-                        </div>
-                        <h4 class="font-bold text-lg sm:text-xl mb-3">Peligros de los Códigos QR</h4>
-                        <p class="text-sm text-slate-500 mb-4">Intervención en COPE sobre riesgos habituales y fraudes con QR.</p>
-                        <a href="https://www.linkedin.com/feed/update/urn:li:activity:7443562420708528128/" target="_blank" class="text-xs font-black text-blue-600 hover:text-blue-800 transition uppercase tracking-widest flex items-center">
-                            <i class="fas fa-external-link-alt mr-2"></i> Ver Publicación
-                        </a>
-                    </div>
-                    <audio controls class="w-full mt-5"><source src="RADIO/PabloCOPEQR.mp3" type="audio/mpeg"></audio>
+            
+            <!-- Radio Player -->
+            <div class="radio-player" id="radioPlayer">
+                <div class="radio-cover-container">
+                    <img id="radioCoverImg" src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop" alt="Portada del programa" class="radio-cover">
                 </div>
-                <div class="radio-square interactive-card p-6 rounded-3xl border border-slate-200 flex flex-col justify-between">
-                    <div>
-                        <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=1200&auto=format&fit=crop" alt="Redes WiFi y seguridad" class="radio-cover mb-4">
-                        <div class="w-12 h-12 rounded-xl bg-cyan-100 text-cyan-700 flex items-center justify-center mb-4">
-                            <i class="fas fa-wifi text-xl"></i>
-                        </div>
-                        <h4 class="font-bold text-lg sm:text-xl mb-3">WiFi Públicas: Riesgos</h4>
-                        <p class="text-sm text-slate-500 mb-4">Consejos prácticos para conectarte con seguridad fuera de casa o del trabajo.</p>
+                
+                <div class="radio-info">
+                    <div class="w-12 h-12 rounded-xl bg-sky-100 text-sky-700 flex items-center justify-center mb-4 mx-auto">
+                        <i id="radioIcon" class="fas fa-qrcode text-xl"></i>
                     </div>
-                    <audio controls class="w-full mt-5"><source src="RADIO/PABLOCOPEWIFI.mp3" type="audio/mpeg"></audio>
-                </div>
-                <div class="radio-square interactive-card p-6 rounded-3xl border border-slate-200 flex flex-col justify-between">
-                    <div>
-                        <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?q=80&w=1200&auto=format&fit=crop" alt="DNI digital e implementación" class="radio-cover mb-4">
-                        <div class="w-12 h-12 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center mb-4">
-                            <i class="fas fa-id-card text-xl"></i>
-                        </div>
-                        <h4 class="font-bold text-lg sm:text-xl mb-3">DNI Digital: Implementación</h4>
-                        <p class="text-sm text-slate-500 mb-4">Intervención en COPE sobre el DNI digital, su despliegue y cómo afectará al uso diario.</p>
+                    <h4 class="radio-title" id="radioTitle">Peligros de los Códigos QR</h4>
+                    <p class="radio-description" id="radioDescription">Intervención en COPE sobre riesgos habituales y fraudes con QR.</p>
+                    
+                    <div class="radio-controls">
+                        <button class="radio-btn" id="prevBtn" onclick="prevSong()" title="Anterior">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="radio-btn" id="playBtn" onclick="togglePlay()" title="Reproducir">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <button class="radio-btn" id="nextBtn" onclick="nextSong()" title="Siguiente">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
                     </div>
-                    <audio controls class="w-full mt-5"><source src="RADIO/PabloCOPEDNIDIGITAL.mp3" type="audio/mpeg"></audio>
+
+                    <a id="radioLink" href="https://www.linkedin.com/feed/update/urn:li:activity:7443562420708528128/" target="_blank" class="text-xs font-black text-blue-600 hover:text-blue-800 transition uppercase tracking-widest flex items-center justify-center">
+                        <i class="fas fa-external-link-alt mr-2"></i> Ver Publicación
+                    </a>
                 </div>
+                
+                <audio id="radioAudio" controls style="margin: 0;"></audio>
+                
+                <div class="radio-dots" id="radioDots"></div>
             </div>
         </div>
     </section>
@@ -799,6 +931,128 @@
         document.addEventListener('mouseleave', function () {
             cursorShadow.style.opacity = '0';
         });
+
+        // ===== RADIO PLAYER =====
+        const songs = [
+            {
+                title: "Peligros de los Códigos QR",
+                description: "Intervención en COPE sobre riesgos habituales y fraudes con QR.",
+                icon: "fa-qrcode",
+                color: "sky",
+                file: "RADIO/PabloCOPEQR.mp3",
+                image: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop",
+                link: "https://www.linkedin.com/feed/update/urn:li:activity:7443562420708528128/"
+            },
+            {
+                title: "WiFi Públicas: Riesgos",
+                description: "Consejos prácticos para conectarte con seguridad fuera de casa o del trabajo.",
+                icon: "fa-wifi",
+                color: "cyan",
+                file: "RADIO/PABLOCOPEWIFI.mp3",
+                image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=1200&auto=format&fit=crop",
+                link: "https://www.linkedin.com/feed/update/urn:li:activity:7443562420708528128/"
+            },
+            {
+                title: "DNI Digital: Implementación",
+                description: "Intervención en COPE sobre el DNI digital, su despliegue y cómo afectará al uso diario.",
+                icon: "fa-id-card",
+                color: "indigo",
+                file: "RADIO/PabloCOPEDNIDIGITAL.mp3",
+                image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?q=80&w=1200&auto=format&fit=crop",
+                link: "https://www.linkedin.com/feed/update/urn:li:activity:7443562420708528128/"
+            }
+        ];
+
+        let currentSongIndex = 0;
+        const audio = document.getElementById('radioAudio');
+        const playBtn = document.getElementById('playBtn');
+
+        function initRadio() {
+            loadSong(currentSongIndex);
+            createDots();
+            updateDots();
+        }
+
+        function loadSong(index) {
+            const song = songs[index];
+            document.getElementById('radioCoverImg').src = song.image;
+            document.getElementById('radioTitle').textContent = song.title;
+            document.getElementById('radioDescription').textContent = song.description;
+            document.getElementById('radioIcon').className = `fas ${song.icon} text-xl`;
+            document.getElementById('radioLink').href = song.link;
+            audio.src = song.file;
+            
+            // Actualizar colores del botón de play
+            const colorMap = {
+                sky: 'from-sky-600 to-sky-400',
+                cyan: 'from-cyan-600 to-cyan-400',
+                indigo: 'from-indigo-600 to-indigo-400'
+            };
+            
+            document.getElementById('radioCoverImg').parentElement.className = `radio-cover-container bg-gradient-to-br ${colorMap[song.color]}`;
+            
+            updateDots();
+        }
+
+        function createDots() {
+            const dotsContainer = document.getElementById('radioDots');
+            dotsContainer.innerHTML = '';
+            songs.forEach((_, index) => {
+                const dot = document.createElement('div');
+                dot.className = 'radio-dot';
+                dot.onclick = () => goToSong(index);
+                dotsContainer.appendChild(dot);
+            });
+        }
+
+        function updateDots() {
+            document.querySelectorAll('.radio-dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSongIndex);
+            });
+        }
+
+        function nextSong() {
+            currentSongIndex = (currentSongIndex + 1) % songs.length;
+            loadSong(currentSongIndex);
+            audio.play();
+        }
+
+        function prevSong() {
+            currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
+            loadSong(currentSongIndex);
+            audio.play();
+        }
+
+        function goToSong(index) {
+            currentSongIndex = index;
+            loadSong(currentSongIndex);
+            audio.play();
+        }
+
+        function togglePlay() {
+            if (audio.paused) {
+                audio.play();
+                playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+            } else {
+                audio.pause();
+                playBtn.innerHTML = '<i class="fas fa-play"></i>';
+            }
+        }
+
+        audio.addEventListener('play', () => {
+            playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+        });
+
+        audio.addEventListener('pause', () => {
+            playBtn.innerHTML = '<i class="fas fa-play"></i>';
+        });
+
+        audio.addEventListener('ended', () => {
+            nextSong();
+        });
+
+        // Inicializar radio cuando carga la página
+        window.addEventListener('load', initRadio);
     </script>
 </body>
 </html>
